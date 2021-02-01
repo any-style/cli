@@ -28,13 +28,6 @@ describe('Finder consumes suite path.', () => {
       )
     })
 
-    it('throws if package.json is not file', () => {
-      assert.throws(
-        () => finder(fixture_path('finder/suite-dir-json')),
-        /package\.json.*? must be a file/
-      )
-    })
-
     it('throws if package.json lacks "rules" config', () => {
       assert.throws(
         () => finder(fixture_path('finder/suite-no-rules')),
