@@ -4,6 +4,7 @@ if (process.argv.length < 4) {
   process.exit()
 }
 
+import path from 'path'
 import load from './lib/loader'
 import finder from './lib/finder'
 import runner from './lib/runner'
@@ -14,7 +15,11 @@ import CtxFile from './lib/ctx_file'
 import CtxMain from './lib/ctx_main'
 
 new fmt(runner)
-const suites = process.argv.slice(2, 3)
+const suites = process
+  .argv
+  .slice(2, 3)
+  // Transform relative paths into absolute.
+  .map(suite => suite[0] === '.' ? path.join(__dirname, suite) : suite)
 
 runner.emit('BEGIN_FINDING_RULES')
 const found_rules: string[][] = []
